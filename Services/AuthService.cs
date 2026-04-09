@@ -147,6 +147,16 @@ namespace LibraryManagementSystem.Services
             CurrentUser = null;
         }
 
+        public static bool UpdatePassword(int userId, string newPassword)
+        {
+            string hashedPassword = HashPassword(newPassword);
+            string query = "UPDATE Users SET Password = @password WHERE Id = @id";
+            DatabaseHelper.ExecuteNonQuery(query, 
+                new SQLiteParameter("@password", hashedPassword),
+                new SQLiteParameter("@id", userId));
+            return true;
+        }
+
         public static string HashPassword(string password)
         {
             // PBKDF2 with HMAC, 128-bit salt, 256-bit subkey, 100000 iterations
