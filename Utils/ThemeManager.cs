@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace LibraryManagementSystem.Utils
 {
@@ -12,10 +13,17 @@ namespace LibraryManagementSystem.Utils
         private static readonly Color SecondaryTextColor = Color.FromArgb(99, 110, 114);
         private static readonly Color GridBackColor = Color.White;
         private static readonly Color GridHeaderBackColor = Color.FromArgb(236, 240, 241);
-        private static readonly Color HoverColorMultiplier = Color.FromArgb(20, 0, 0, 0); // Used to darken buttons on hover
+        
+        // Sidebar Colors
+        private static readonly Color SidebarBackColor = Color.FromArgb(44, 62, 80);
+        private static readonly Color SidebarHoverColor = Color.FromArgb(52, 73, 94);
+        private static readonly Color SidebarActiveColor = Color.FromArgb(41, 128, 185);
 
         private static readonly Font BaseFont = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(162)));
         private static readonly Font TitleFont = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(162)));
+
+        // To keep track of the currently active sidebar button per form
+        private static Dictionary<Form, Button> ActiveSidebarButtons = new Dictionary<Form, Button>();
 
         public static void ApplyTheme(Form form)
         {
@@ -23,24 +31,34 @@ namespace LibraryManagementSystem.Utils
 
             form.BackColor = FormBackColor;
             form.ForeColor = PrimaryTextColor;
-            // Try to set Segoe UI globally, but respect existing sizes where possible
             
-            ApplyRecursively(form.Controls);
+            ApplyRecursively(form.Controls, form);
         }
 
-        private static void ApplyRecursively(Control.ControlCollection controls)
+        private static void ApplyRecursively(Control.ControlCollection controls, Form parentForm)
         {
             foreach (Control ctrl in controls)
             {
-                // Update font family but keep size and style
                 if (ctrl.Font.Name != "Segoe UI")
                 {
                     ctrl.Font = new Font("Segoe UI", ctrl.Font.Size, ctrl.Font.Style, ctrl.Font.Unit);
                 }
 
-                if (ctrl is Button btn)
+                if (ctrl is Panel pnl && pnl.Name == "panelSidebar")
                 {
-                    ApplyButtonTheme(btn);
+                    SetupSidebar(pnl, parentForm);
+                }
+                else if (ctrl is Button btn)
+                {
+                    // Don't override sidebar buttons if already processed, but checking parent is safe
+                    if (btn.Parent != null && btn.Parent.Name == "panelSidebar")
+                    {
+                        // handled in SetupSidebar
+                    }
+                    else
+                    {
+                        ApplyButtonTheme(btn);
+                    }
                 }
                 else if (ctrl is DataGridView dgv)
                 {
@@ -60,11 +78,84 @@ namespace LibraryManagementSystem.Utils
                     }
                 }
                 
-                // Recursively apply to children (Panels, GroupBoxes, etc)
                 if (ctrl.HasChildren)
                 {
-                    ApplyRecursively(ctrl.Controls);
+                    ApplyRecursively(ctrl.Controls, parentForm);
                 }
+            }
+        }
+
+        private static void SetupSidebar(Panel sidebar, Form parentForm)
+        {
+            foreach (Control ctrl in sidebar.Controls)
+            {
+                if (ctrl is Button btn)
+                {
+                    btn.BackColor = SidebarBackColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatStyle = FlatStyle.Flat;
+                    btn.FlatAppearance.BorderSize = 0;
+                    btn.Cursor = Cursors.Hand;
+
+                    // Exclude specific buttons from getting active state (like logout) if necessary
+                    // But we can just handle all visually
+                    btn.MouseEnter += (s, e) => 
+                    {
+                        if (!IsActiveButton(parentForm, btn)) 
+                            btn.BackColor = SidebarHoverColor; 
+                    };
+                    
+                    btn.MouseLeave += (s, e) => 
+                    {
+                        if (!IsActiveButton(parentForm, btn)) 
+                            btn.BackColor = SidebarBackColor; 
+                    };
+                    
+                    btn.Click += (s, e) => 
+                    {
+                        SetActiveButton(parentForm, btn, sidebar);
+                    };
+                }
+            }
+        }
+
+        private static bool IsActiveButton(Form form, Button btn)
+        {
+            if (ActiveSidebarButtons.ContainsKey(form))
+            {
+                return ActiveSidebarButtons[form] == btn;
+            }
+            return false;
+        }
+
+        private static void SetActiveButton(Form form, Button activeBtn, Panel sidebar)
+        {
+            // Reset others
+            foreach (Control ctrl in sidebar.Controls)
+            {
+                if (ctrl is Button btn)
+                {
+                    // Check if it's logout to avoid keeping it active
+                    if (btn.Name.Contains("Logout") || btn.Name.Contains("ChangePassword"))
+                    {
+                        btn.BackColor = SidebarBackColor;
+                        continue;
+                    }
+
+                    if (btn == activeBtn)
+                    {
+                        btn.BackColor = SidebarActiveColor;
+                    }
+                    else
+                    {
+                        btn.BackColor = SidebarBackColor;
+                    }
+                }
+            }
+
+            if (!activeBtn.Name.Contains("Logout") && !activeBtn.Name.Contains("ChangePassword"))
+            {
+                ActiveSidebarButtons[form] = activeBtn;
             }
         }
 
@@ -74,36 +165,16 @@ namespace LibraryManagementSystem.Utils
             btn.FlatAppearance.BorderSize = 0;
             btn.Cursor = Cursors.Hand;
             
-            // If the button has default system control color, give it a premium blue
             if (btn.BackColor == SystemColors.Control)
             {
                 btn.BackColor = Color.FromArgb(52, 152, 219);
                 btn.ForeColor = Color.White;
             }
 
-            // Hover effect event handlers
-            btn.MouseEnter -= Btn_MouseEnter;
-            btn.MouseLeave -= Btn_MouseLeave;
-            btn.MouseEnter += Btn_MouseEnter;
-            btn.MouseLeave += Btn_MouseLeave;
-        }
-
-        private static void Btn_MouseEnter(object sender, EventArgs e)
-        {
-            if (sender is Button btn)
-            {
-                // Darken slightly
-                btn.BackColor = ControlPaint.Dark(btn.BackColor, 0.05f);
-            }
-        }
-
-        private static void Btn_MouseLeave(object sender, EventArgs e)
-        {
-            if (sender is Button btn)
-            {
-                // Lighten slightly to go back (Wait, Dark/Light isn't perfect toggle, we can store tags, but for simple effect we just Lighten back)
-                btn.BackColor = ControlPaint.Light(btn.BackColor, 0.05f);
-            }
+            // Normal button hover
+            Color originalColor = btn.BackColor;
+            btn.MouseEnter += (s, e) => { btn.BackColor = ControlPaint.Dark(originalColor, 0.05f); };
+            btn.MouseLeave += (s, e) => { btn.BackColor = originalColor; };
         }
 
         private static void ApplyDataGridViewTheme(DataGridView dgv)
@@ -114,15 +185,13 @@ namespace LibraryManagementSystem.Utils
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgv.GridColor = Color.FromArgb(223, 228, 234);
 
-            // Default Cell Style
             dgv.DefaultCellStyle.BackColor = Color.White;
             dgv.DefaultCellStyle.ForeColor = PrimaryTextColor;
-            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(116, 185, 255); // Soft blue selection
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(116, 185, 255);
             dgv.DefaultCellStyle.SelectionForeColor = Color.White;
             dgv.DefaultCellStyle.Font = BaseFont;
             dgv.DefaultCellStyle.Padding = new Padding(5);
 
-            // Header Style
             dgv.ColumnHeadersDefaultCellStyle.BackColor = GridHeaderBackColor;
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = SecondaryTextColor;
             dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = GridHeaderBackColor;
@@ -131,14 +200,12 @@ namespace LibraryManagementSystem.Utils
             dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgv.ColumnHeadersHeight = 40;
 
-            // Row Style
             dgv.RowTemplate.Height = 35;
-            dgv.RowHeadersVisible = false; // Hide annoying left arrow empty column
+            dgv.RowHeadersVisible = false;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.MultiSelect = false;
             dgv.AllowUserToResizeRows = false;
             
-            // Alternating rows
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 251, 253);
         }
     }

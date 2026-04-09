@@ -11,6 +11,7 @@ namespace LibraryManagementSystem.Forms
             InitializeComponent();
             LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             LoadUserInfo();
+            this.Load += (s, e) => btnReports.PerformClick();
         }
 
         private void LoadUserInfo()

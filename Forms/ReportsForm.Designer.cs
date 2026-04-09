@@ -72,7 +72,7 @@ namespace LibraryManagementSystem.Forms
             // 
             // pnlStats
             // 
-            this.pnlStats.BackColor = System.Drawing.Color.White;
+            this.pnlStats.BackColor = System.Drawing.Color.Transparent;
             this.pnlStats.Controls.Add(this.lblDailyBorrows);
             this.pnlStats.Controls.Add(this.lblDailyReturns);
             this.pnlStats.Controls.Add(this.lblWeeklyBorrows);
@@ -80,68 +80,78 @@ namespace LibraryManagementSystem.Forms
             this.pnlStats.Controls.Add(this.lblOverdue);
             this.pnlStats.Location = new System.Drawing.Point(30, 70);
             this.pnlStats.Name = "pnlStats";
-            this.pnlStats.Size = new System.Drawing.Size(940, 80);
+            this.pnlStats.Size = new System.Drawing.Size(940, 70);
             this.pnlStats.TabIndex = 1;
             
             // 
             // lblDailyBorrows
             // 
-            this.lblDailyBorrows.AutoSize = true;
-            this.lblDailyBorrows.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblDailyBorrows.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-            this.lblDailyBorrows.Location = new System.Drawing.Point(20, 30);
+            this.lblDailyBorrows.AutoSize = false;
+            this.lblDailyBorrows.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
+            this.lblDailyBorrows.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblDailyBorrows.ForeColor = System.Drawing.Color.White;
+            this.lblDailyBorrows.Location = new System.Drawing.Point(0, 0);
             this.lblDailyBorrows.Name = "lblDailyBorrows";
-            this.lblDailyBorrows.Size = new System.Drawing.Size(130, 21);
+            this.lblDailyBorrows.Size = new System.Drawing.Size(160, 60);
             this.lblDailyBorrows.TabIndex = 1;
-            this.lblDailyBorrows.Text = "Günlük Ödünç: 0";
+            this.lblDailyBorrows.Text = "Günlük Ödünç\n0";
+            this.lblDailyBorrows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             
             // 
             // lblDailyReturns
             // 
-            this.lblDailyReturns.AutoSize = true;
-            this.lblDailyReturns.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblDailyReturns.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-            this.lblDailyReturns.Location = new System.Drawing.Point(200, 30);
+            this.lblDailyReturns.AutoSize = false;
+            this.lblDailyReturns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.lblDailyReturns.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblDailyReturns.ForeColor = System.Drawing.Color.White;
+            this.lblDailyReturns.Location = new System.Drawing.Point(180, 0);
             this.lblDailyReturns.Name = "lblDailyReturns";
-            this.lblDailyReturns.Size = new System.Drawing.Size(110, 21);
+            this.lblDailyReturns.Size = new System.Drawing.Size(160, 60);
             this.lblDailyReturns.TabIndex = 2;
-            this.lblDailyReturns.Text = "Günlük İade: 0";
+            this.lblDailyReturns.Text = "Günlük İade\n0";
+            this.lblDailyReturns.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             
             // 
             // lblWeeklyBorrows
             // 
-            this.lblWeeklyBorrows.AutoSize = true;
-            this.lblWeeklyBorrows.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblWeeklyBorrows.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-            this.lblWeeklyBorrows.Location = new System.Drawing.Point(370, 30);
+            this.lblWeeklyBorrows.AutoSize = false;
+            this.lblWeeklyBorrows.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.lblWeeklyBorrows.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblWeeklyBorrows.ForeColor = System.Drawing.Color.White;
+            this.lblWeeklyBorrows.Location = new System.Drawing.Point(360, 0);
             this.lblWeeklyBorrows.Name = "lblWeeklyBorrows";
-            this.lblWeeklyBorrows.Size = new System.Drawing.Size(140, 21);
+            this.lblWeeklyBorrows.Size = new System.Drawing.Size(160, 60);
             this.lblWeeklyBorrows.TabIndex = 3;
-            this.lblWeeklyBorrows.Text = "Haftalık Ödünç: 0";
+            this.lblWeeklyBorrows.Text = "Haftalık Ödünç\n0";
+            this.lblWeeklyBorrows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             
             // 
             // lblMonthlyBorrows
             // 
-            this.lblMonthlyBorrows.AutoSize = true;
-            this.lblMonthlyBorrows.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblMonthlyBorrows.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-            this.lblMonthlyBorrows.Location = new System.Drawing.Point(550, 30);
+            this.lblMonthlyBorrows.AutoSize = false;
+            this.lblMonthlyBorrows.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(196)))), ((int)(((byte)(15)))));
+            this.lblMonthlyBorrows.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblMonthlyBorrows.ForeColor = System.Drawing.Color.White;
+            this.lblMonthlyBorrows.Location = new System.Drawing.Point(540, 0);
             this.lblMonthlyBorrows.Name = "lblMonthlyBorrows";
-            this.lblMonthlyBorrows.Size = new System.Drawing.Size(120, 21);
+            this.lblMonthlyBorrows.Size = new System.Drawing.Size(160, 60);
             this.lblMonthlyBorrows.TabIndex = 4;
-            this.lblMonthlyBorrows.Text = "Aylık Ödünç: 0";
+            this.lblMonthlyBorrows.Text = "Aylık Ödünç\n0";
+            this.lblMonthlyBorrows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             
             // 
             // lblOverdue
             // 
-            this.lblOverdue.AutoSize = true;
-            this.lblOverdue.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblOverdue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.lblOverdue.Location = new System.Drawing.Point(740, 30);
+            this.lblOverdue.AutoSize = false;
+            this.lblOverdue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.lblOverdue.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblOverdue.ForeColor = System.Drawing.Color.White;
+            this.lblOverdue.Location = new System.Drawing.Point(720, 0);
             this.lblOverdue.Name = "lblOverdue";
-            this.lblOverdue.Size = new System.Drawing.Size(160, 21);
+            this.lblOverdue.Size = new System.Drawing.Size(160, 60);
             this.lblOverdue.TabIndex = 5;
-            this.lblOverdue.Text = "Gecikmiş Kitaplar: 0";
+            this.lblOverdue.Text = "Gecikmiş Kitaplar\n0";
+            this.lblOverdue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             
             // 
             // lblMostBorrowed
@@ -180,7 +190,7 @@ namespace LibraryManagementSystem.Forms
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
             this.btnRefresh.FlatAppearance.BorderSize = 0;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -208,7 +218,6 @@ namespace LibraryManagementSystem.Forms
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             this.pnlStats.ResumeLayout(false);
-            this.pnlStats.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMostBorrowed)).EndInit();
             this.ResumeLayout(false);
         }

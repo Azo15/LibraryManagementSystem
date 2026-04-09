@@ -26,21 +26,21 @@ namespace LibraryManagementSystem.Forms
             // Daily stats
             int dailyBorrows = ReportService.GetDailyBorrowCount(today);
             int dailyReturns = ReportService.GetDailyReturnCount(today);
-            lblDailyBorrows.Text = $"Günlük Ödünç: {dailyBorrows}";
-            lblDailyReturns.Text = $"Günlük İade: {dailyReturns}";
+            lblDailyBorrows.Text = $"Günlük Ödünç\n{dailyBorrows}";
+            lblDailyReturns.Text = $"Günlük İade\n{dailyReturns}";
 
             // Weekly stats
             DateTime weekStart = today.AddDays(-(int)today.DayOfWeek);
             int weeklyBorrows = ReportService.GetWeeklyBorrowCount(weekStart);
-            lblWeeklyBorrows.Text = $"Haftalık Ödünç: {weeklyBorrows}";
+            lblWeeklyBorrows.Text = $"Haftalık Ödünç\n{weeklyBorrows}";
 
             // Monthly stats
             int monthlyBorrows = ReportService.GetMonthlyBorrowCount(today.Year, today.Month);
-            lblMonthlyBorrows.Text = $"Aylık Ödünç: {monthlyBorrows}";
+            lblMonthlyBorrows.Text = $"Aylık Ödünç\n{monthlyBorrows}";
 
             // Overdue
             int overdueCount = ReportService.GetOverdueCount();
-            lblOverdue.Text = $"Gecikmiş Kitaplar: {overdueCount}";
+            lblOverdue.Text = $"Gecikmiş Kitaplar\n{overdueCount}";
 
             // Most borrowed books
             LoadMostBorrowedBooks();
