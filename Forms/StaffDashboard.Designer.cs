@@ -12,6 +12,7 @@ namespace LibraryManagementSystem.Forms
         private System.Windows.Forms.Button btnUpdateStatus;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnChangePassword;
 
         protected override void Dispose(bool disposing)
         {
@@ -26,6 +27,7 @@ namespace LibraryManagementSystem.Forms
         {
             this.panelMain = new System.Windows.Forms.Panel();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.btnChangePassword = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnUpdateStatus = new System.Windows.Forms.Button();
             this.dgvRequests = new System.Windows.Forms.DataGridView();
@@ -39,6 +41,7 @@ namespace LibraryManagementSystem.Forms
             // 
             // panelMain
             // 
+            this.panelMain.Controls.Add(this.btnChangePassword);
             this.panelMain.Controls.Add(this.btnLogout);
             this.panelMain.Controls.Add(this.btnRefresh);
             this.panelMain.Controls.Add(this.btnUpdateStatus);
@@ -163,6 +166,21 @@ namespace LibraryManagementSystem.Forms
             this.btnLogout.Text = "Çıkış Yap";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnChangePassword
+            // 
+            this.btnChangePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
+            this.btnChangePassword.FlatAppearance.BorderSize = 0;
+            this.btnChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnChangePassword.ForeColor = System.Drawing.Color.White;
+            this.btnChangePassword.Location = new System.Drawing.Point(710, 520);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(150, 40);
+            this.btnChangePassword.TabIndex = 10;
+            this.btnChangePassword.Text = "Şifre Değiştir";
+            this.btnChangePassword.UseVisualStyleBackColor = false;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
             // StaffDashboard
             // 

@@ -46,6 +46,12 @@ namespace LibraryManagementSystem.Forms
             trackingForm.ShowDialog();
         }
 
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            ChangePasswordForm form = new ChangePasswordForm();
+            form.ShowDialog();
+        }
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
             AuthService.Logout();
