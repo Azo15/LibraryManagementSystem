@@ -6,7 +6,7 @@ namespace LibraryManagementSystem.Database
 {
     public static class DatabaseHelper
     {
-        private static string connectionString = "Data Source=library.db;Version=3;";
+        private static string connectionString = "Data Source=library.db;Version=3;Foreign Keys=True;";
 
         public static void InitializeDatabase()
         {

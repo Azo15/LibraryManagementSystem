@@ -212,10 +212,10 @@ namespace LibraryManagementSystem.Services
 
         public static bool DeleteBook(int bookId)
         {
-            // Check if book has active borrow requests
+            // Check if book has ANY borrow requests (to prevent orphaned records)
             string checkBorrows = @"
                 SELECT COUNT(*) FROM BorrowRequests 
-                WHERE BookId = @bookId AND Status IN (1, 2, 3)";
+                WHERE BookId = @bookId";
 
             object result = DatabaseHelper.ExecuteScalar(checkBorrows, new SQLiteParameter("@bookId", bookId));
             if (Convert.ToInt32(result) > 0)

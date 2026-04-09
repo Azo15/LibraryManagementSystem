@@ -85,10 +85,17 @@ namespace LibraryManagementSystem.Forms
 
             if (InputValidator.ShowConfirmation("Bu kullanıcıyı silmek istediğinize emin misiniz?") == DialogResult.Yes)
             {
-                string deleteQuery = "DELETE FROM Users WHERE Id = @id";
-                DatabaseHelper.ExecuteNonQuery(deleteQuery, new SQLiteParameter("@id", userId));
-                InputValidator.ShowSuccess("Kullanıcı başarıyla silindi.");
-                LoadUsers();
+                try
+                {
+                    string deleteQuery = "DELETE FROM Users WHERE Id = @id";
+                    DatabaseHelper.ExecuteNonQuery(deleteQuery, new SQLiteParameter("@id", userId));
+                    InputValidator.ShowSuccess("Kullanıcı başarıyla silindi.");
+                    LoadUsers();
+                }
+                catch (SQLiteException)
+                {
+                    InputValidator.ShowError("Uyarı: Bu kullanıcının geçmiş kiralama işlemleri olduğu için veritabanından başarıyla silinemez.");
+                }
             }
         }
 

@@ -132,8 +132,27 @@ namespace LibraryManagementSystem.Services
 
         public static bool UpdateBorrowStatus(int requestId, BorrowStatus newStatus, string notes = null)
         {
+            string getExisting = "SELECT Status, BookId FROM BorrowRequests WHERE Id = @id";
+            BorrowStatus currentStatus;
+            int bookIdToUpdate;
+            using (var reader = DatabaseHelper.ExecuteReader(getExisting, new SQLiteParameter("@id", requestId)))
+            {
+                if (!reader.Read()) return false;
+                currentStatus = (BorrowStatus)reader.GetInt32(0);
+                bookIdToUpdate = reader.GetInt32(1);
+            }
+
+            if (currentStatus == newStatus)
+            {
+                string updateNotes = "UPDATE BorrowRequests SET Notes = @notes WHERE Id = @id";
+                DatabaseHelper.ExecuteNonQuery(updateNotes, 
+                    new SQLiteParameter("@notes", (object)notes ?? DBNull.Value),
+                    new SQLiteParameter("@id", requestId));
+                return true;
+            }
+
             string query = "";
-            var parameters = new List<SQLiteParameter>();
+            var parameters = new System.Collections.Generic.List<SQLiteParameter>();
 
             switch (newStatus)
             {
@@ -149,37 +168,35 @@ namespace LibraryManagementSystem.Services
                     break;
 
                 case BorrowStatus.TeslimEdildi:
+                    if (currentStatus != BorrowStatus.TeslimEdildi && currentStatus != BorrowStatus.Gecikmiş)
+                    {
+                        string updateStock = "UPDATE Books SET Stock = Stock - 1 WHERE Id = @bookId AND Stock > 0";
+                        int rowsAffected = DatabaseHelper.ExecuteNonQuery(updateStock, new SQLiteParameter("@bookId", bookIdToUpdate));
+                        if (rowsAffected == 0)
+                        {
+                            Validators.InputValidator.ShowError("Stok yetersiz! Kitap teslim edilemez veya başkası tarafından alındı.");
+                            return false;
+                        }
+                    }
+
                     query = @"
                         UPDATE BorrowRequests 
                         SET Status = @status, DeliveryDate = @date, DueDate = @dueDate, Notes = @notes
                         WHERE Id = @id";
                     parameters.Add(new SQLiteParameter("@status", (int)newStatus));
                     parameters.Add(new SQLiteParameter("@date", DateTime.Now));
-                    parameters.Add(new SQLiteParameter("@dueDate", DateTime.Now.AddDays(14))); // 14 days loan period
+                    parameters.Add(new SQLiteParameter("@dueDate", DateTime.Now.AddDays(14)));
                     parameters.Add(new SQLiteParameter("@notes", (object)notes ?? DBNull.Value));
                     parameters.Add(new SQLiteParameter("@id", requestId));
-                    
-                    // Get BookId first
-                    string getBookIdFirst = "SELECT BookId FROM BorrowRequests WHERE Id = @id";
-                    object bookIdObj = DatabaseHelper.ExecuteScalar(getBookIdFirst, new SQLiteParameter("@id", requestId));
-                    if (bookIdObj == null) return false;
-                    int bookIdToUpdate = Convert.ToInt32(bookIdObj);
-
-                    // Check stock before delivery
-                    string checkStock = "SELECT Stock FROM Books WHERE Id = @bookId";
-                    object stockObj = DatabaseHelper.ExecuteScalar(checkStock, new SQLiteParameter("@bookId", bookIdToUpdate));
-                    
-                    if (stockObj != null && Convert.ToInt32(stockObj) <= 0)
-                    {
-                         Validators.InputValidator.ShowError("Stok yetersiz! Kitap teslim edilemez.");
-                         return false;
-                    }
-
-                    string updateStock = "UPDATE Books SET Stock = Stock - 1 WHERE Id = @bookId";
-                    DatabaseHelper.ExecuteNonQuery(updateStock, new SQLiteParameter("@bookId", bookIdToUpdate));
                     break;
 
                 case BorrowStatus.İadeEdildi:
+                    if (currentStatus == BorrowStatus.TeslimEdildi || currentStatus == BorrowStatus.Gecikmiş)
+                    {
+                        string updateStockReturn = "UPDATE Books SET Stock = Stock + 1 WHERE Id = @bookId";
+                        DatabaseHelper.ExecuteNonQuery(updateStockReturn, new SQLiteParameter("@bookId", bookIdToUpdate));
+                    }
+
                     query = @"
                         UPDATE BorrowRequests 
                         SET Status = @status, ReturnDate = @date, Notes = @notes
@@ -188,28 +205,9 @@ namespace LibraryManagementSystem.Services
                     parameters.Add(new SQLiteParameter("@date", DateTime.Now));
                     parameters.Add(new SQLiteParameter("@notes", (object)notes ?? DBNull.Value));
                     parameters.Add(new SQLiteParameter("@id", requestId));
-                    
-                    // Increase book stock
-                    string getBookIdForReturn = "SELECT BookId FROM BorrowRequests WHERE Id = @id";
-                    object bookIdResultForReturn = DatabaseHelper.ExecuteScalar(getBookIdForReturn, new SQLiteParameter("@id", requestId));
-                    if (bookIdResultForReturn != null)
-                    {
-                        int bookId = Convert.ToInt32(bookIdResultForReturn);
-                        string updateStockReturn = "UPDATE Books SET Stock = Stock + 1 WHERE Id = @bookId";
-                        DatabaseHelper.ExecuteNonQuery(updateStockReturn, new SQLiteParameter("@bookId", bookId));
-                    }
                     break;
 
                 case BorrowStatus.Reddedildi:
-                    query = @"
-                        UPDATE BorrowRequests 
-                        SET Status = @status, Notes = @notes
-                        WHERE Id = @id";
-                    parameters.Add(new SQLiteParameter("@status", (int)newStatus));
-                    parameters.Add(new SQLiteParameter("@notes", (object)notes ?? DBNull.Value));
-                    parameters.Add(new SQLiteParameter("@id", requestId));
-                    break;
-
                 default:
                     query = @"
                         UPDATE BorrowRequests 
