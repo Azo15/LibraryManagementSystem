@@ -154,7 +154,7 @@ namespace LibraryManagementSystem.Forms
             }
 
             // Hash password
-            string hashedPassword = HashPassword(password);
+            string hashedPassword = AuthService.HashPassword(password);
             string insertQuery = @"
                 INSERT INTO Users (FirstName, LastName, Email, Password, Phone, Role)
                 VALUES (@firstName, @lastName, @email, @password, @phone, 2)";
@@ -171,15 +171,6 @@ namespace LibraryManagementSystem.Forms
             this.Close();
         }
 
-        private string HashPassword(string password)
-        {
-            using (System.Security.Cryptography.SHA256 sha256 = System.Security.Cryptography.SHA256.Create())
-            {
-                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(password);
-                byte[] hash = sha256.ComputeHash(bytes);
-                return Convert.ToBase64String(hash);
-            }
-        }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Data.SQLite;
 using System.IO;
+using LibraryManagementSystem.Services;
 
 namespace LibraryManagementSystem.Database
 {
@@ -89,14 +90,8 @@ namespace LibraryManagementSystem.Database
                         INSERT INTO Users (FirstName, LastName, Email, Password, Role)
                         VALUES ('Admin', 'User', 'admin@library.com', @password, 3)";
                     
-                    using (var sha256 = System.Security.Cryptography.SHA256.Create())
-                    {
-                        byte[] bytes = System.Text.Encoding.UTF8.GetBytes("Admin123");
-                        byte[] hash = sha256.ComputeHash(bytes);
-                        string hashedPassword = Convert.ToBase64String(hash);
-                        
-                        ExecuteNonQuery(insertAdmin, new SQLiteParameter("@password", hashedPassword));
-                    }
+                    string hashedPassword = AuthService.HashPassword("Admin123");
+                    ExecuteNonQuery(insertAdmin, new SQLiteParameter("@password", hashedPassword));
                 }
 
                 // Insert default categories if not exists
@@ -152,14 +147,8 @@ namespace LibraryManagementSystem.Database
                         INSERT INTO Users (FirstName, LastName, Email, Password, Role, SchoolNumber)
                         VALUES ('Ahmet', 'Yılmaz', 'ogrenci@okul.com', @password, 1, '2023001')";
                     
-                using (var sha256 = System.Security.Cryptography.SHA256.Create())
-                {
-                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes("Ogrenci123"); // Password: Ogrenci123
-                    byte[] hash = sha256.ComputeHash(bytes);
-                    string hashedPassword = Convert.ToBase64String(hash);
-                    
-                    ExecuteNonQuery(insertStudent, new SQLiteParameter("@password", hashedPassword));
-                }
+                string hashedPassword = AuthService.HashPassword("Ogrenci123");
+                ExecuteNonQuery(insertStudent, new SQLiteParameter("@password", hashedPassword));
             }
         }
 
