@@ -9,6 +9,7 @@ namespace LibraryManagementSystem.Forms
         public StudentDashboard()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             LoadUserInfo();
         }
 

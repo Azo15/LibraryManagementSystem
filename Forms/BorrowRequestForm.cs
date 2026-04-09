@@ -10,6 +10,7 @@ namespace LibraryManagementSystem.Forms
         public BorrowRequestForm()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
         }
 
         private void btnSearchBook_Click(object sender, EventArgs e)

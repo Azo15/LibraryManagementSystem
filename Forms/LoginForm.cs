@@ -9,6 +9,7 @@ namespace LibraryManagementSystem.Forms
         public LoginForm()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

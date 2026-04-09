@@ -13,6 +13,7 @@ namespace LibraryManagementSystem.Forms
         public BookSearchForm()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             LoadCategories();
             LoadBooks();
         }

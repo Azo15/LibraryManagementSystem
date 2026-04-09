@@ -9,6 +9,7 @@ namespace LibraryManagementSystem.Forms
         public ReportsForm()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             
             ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(btnRefresh, "Verileri güncellemek için tıklayın.");

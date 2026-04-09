@@ -145,6 +145,7 @@
     <Compile Include="Services\BookService.cs" />
     <Compile Include="Services\BorrowService.cs" />
     <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Utils\ThemeManager.cs" />
     <Compile Include="Validators\InputValidator.cs" />
     <EmbeddedResource Include="Forms\UpdateStatusForm.resx">
       <DependentUpon>UpdateStatusForm.cs</DependentUpon>

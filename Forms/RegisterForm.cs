@@ -9,6 +9,7 @@ namespace LibraryManagementSystem.Forms
         public RegisterForm()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
         }
 
         private void btnRegister_Click(object sender, EventArgs e)

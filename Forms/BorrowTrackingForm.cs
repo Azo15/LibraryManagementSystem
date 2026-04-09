@@ -10,6 +10,7 @@ namespace LibraryManagementSystem.Forms
         public BorrowTrackingForm()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             LoadBorrowRequests();
         }
 

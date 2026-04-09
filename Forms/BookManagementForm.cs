@@ -10,6 +10,7 @@ namespace LibraryManagementSystem.Forms
         public BookManagementForm()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             LoadCategories();
             LoadBooks();
         }

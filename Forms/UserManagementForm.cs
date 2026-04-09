@@ -14,6 +14,7 @@ namespace LibraryManagementSystem.Forms
         public UserManagementForm()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             LoadUsers();
         }
 
@@ -110,6 +111,7 @@ namespace LibraryManagementSystem.Forms
         public AddStaffForm()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

@@ -9,6 +9,7 @@ namespace LibraryManagementSystem.Forms
         public ChangePasswordForm()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

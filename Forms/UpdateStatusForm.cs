@@ -13,6 +13,7 @@ namespace LibraryManagementSystem.Forms
         public UpdateStatusForm(int requestId, BorrowStatus currentStatus)
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             this.requestId = requestId;
             this.currentStatus = currentStatus;
             LoadStatuses();

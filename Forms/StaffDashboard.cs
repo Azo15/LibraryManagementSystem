@@ -10,6 +10,7 @@ namespace LibraryManagementSystem.Forms
         public StaffDashboard()
         {
             InitializeComponent();
+            LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             LoadUserInfo();
             LoadBorrowRequests();
             LoadDailySummary();
