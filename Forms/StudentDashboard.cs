@@ -26,10 +26,22 @@ namespace LibraryManagementSystem.Forms
             toolTip.SetToolTip(btnLogout, "Oturumu güvenli bir şekilde kapatır.");
         }
 
+        private void LoadForm(Form form)
+        {
+            if (this.panelContent.Controls.Count > 0)
+                this.panelContent.Controls[0].Dispose();
+
+            form.TopLevel = false;
+            form.Dock = DockStyle.Fill;
+            form.FormBorderStyle = FormBorderStyle.None;
+            this.panelContent.Controls.Add(form);
+            this.panelContent.Tag = form;
+            form.Show();
+        }
+
         private void btnSearchBooks_Click(object sender, EventArgs e)
         {
-            BookSearchForm searchForm = new BookSearchForm();
-            searchForm.ShowDialog();
+            LoadForm(new BookSearchForm());
         }
 
         private void btnBorrowRequest_Click(object sender, EventArgs e)
@@ -43,8 +55,7 @@ namespace LibraryManagementSystem.Forms
 
         private void btnTrackBorrows_Click(object sender, EventArgs e)
         {
-            BorrowTrackingForm trackingForm = new BorrowTrackingForm();
-            trackingForm.ShowDialog();
+            LoadForm(new BorrowTrackingForm());
         }
 
         private void btnChangePassword_Click(object sender, EventArgs e)
