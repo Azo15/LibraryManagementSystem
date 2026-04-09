@@ -19,22 +19,32 @@ namespace LibraryManagementSystem.Forms
             lblWelcome.Text = $"Hoş Geldiniz, {user.FullName}";
         }
 
+        private void LoadForm(Form form)
+        {
+            if (this.panelContent.Controls.Count > 0)
+                this.panelContent.Controls[0].Dispose();
+
+            form.TopLevel = false;
+            form.Dock = DockStyle.Fill;
+            form.FormBorderStyle = FormBorderStyle.None;
+            this.panelContent.Controls.Add(form);
+            this.panelContent.Tag = form;
+            form.Show();
+        }
+
         private void btnBookManagement_Click(object sender, EventArgs e)
         {
-            BookManagementForm bookForm = new BookManagementForm();
-            bookForm.ShowDialog();
+            LoadForm(new BookManagementForm());
         }
 
         private void btnUserManagement_Click(object sender, EventArgs e)
         {
-            UserManagementForm userForm = new UserManagementForm();
-            userForm.ShowDialog();
+            LoadForm(new UserManagementForm());
         }
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            ReportsForm reportsForm = new ReportsForm();
-            reportsForm.ShowDialog();
+            LoadForm(new ReportsForm());
         }
 
         private void btnChangePassword_Click(object sender, EventArgs e)
