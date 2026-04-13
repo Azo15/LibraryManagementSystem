@@ -15,6 +15,7 @@ namespace LibraryManagementSystem.Forms
             LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             LoadStats();
             SetupCharts();
+            LoadRecentActivities();
         }
 
         private void LoadStats()
@@ -67,6 +68,52 @@ namespace LibraryManagementSystem.Forms
             chartLine.Series.Add(series2);
             chartLine.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
             chartLine.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
+        }
+
+        private void LoadRecentActivities()
+        {
+            flpActivities.Controls.Clear();
+
+            string[] activities = new string[] 
+            {
+                "📚 'Yüzüklerin Efendisi' ödünç alındı. (Ahmet Yılmaz)",
+                "✅ 'Sefiller' iade edildi. Teslim tarihi: Bugün.",
+                "⚠️ 'Suç ve Ceza' ödünç süresi dolmak üzere! (Ayşe Demir)",
+                "🆕 Sisteme yeni bir kitap eklendi: 'Zamanın Kısa Tarihi'",
+                "🔔 3 yeni öğrenci sisteme kayıt oldu.",
+                "📚 'Dune' ödünç alındı. (Mehmet Kaya)"
+            };
+
+            foreach (var act in activities)
+            {
+                Panel pnlNotification = new Panel();
+                pnlNotification.Width = flpActivities.Width - 10;
+                pnlNotification.Height = 70;
+                pnlNotification.Margin = new Padding(0, 5, 0, 10);
+                pnlNotification.BackColor = Color.FromArgb(250, 251, 253);
+
+                Label lblAct = new Label();
+                lblAct.Text = act;
+                lblAct.AutoSize = false;
+                lblAct.Width = pnlNotification.Width - 20;
+                lblAct.Height = pnlNotification.Height;
+                lblAct.Location = new Point(10, 20);
+                lblAct.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+                lblAct.ForeColor = Color.FromArgb(44, 62, 80);
+
+                pnlNotification.Controls.Add(lblAct);
+                
+                // Draw bottom border
+                pnlNotification.Paint += (s, e) => {
+                    ControlPaint.DrawBorder(e.Graphics, pnlNotification.ClientRectangle, 
+                    Color.Transparent, 0, ButtonBorderStyle.None,
+                    Color.Transparent, 0, ButtonBorderStyle.None,
+                    Color.Transparent, 0, ButtonBorderStyle.None,
+                    Color.FromArgb(236, 240, 241), 1, ButtonBorderStyle.Solid);
+                };
+
+                flpActivities.Controls.Add(pnlNotification);
+            }
         }
 
         private void pnlBanner_Paint(object sender, PaintEventArgs e)
