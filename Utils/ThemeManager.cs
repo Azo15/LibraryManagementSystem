@@ -14,10 +14,11 @@ namespace LibraryManagementSystem.Utils
         private static readonly Color GridBackColor = Color.White;
         private static readonly Color GridHeaderBackColor = Color.FromArgb(236, 240, 241);
         
-        // Sidebar Colors
-        private static readonly Color SidebarBackColor = Color.FromArgb(44, 62, 80);
-        private static readonly Color SidebarHoverColor = Color.FromArgb(52, 73, 94);
-        private static readonly Color SidebarActiveColor = Color.FromArgb(41, 128, 185);
+        // TopNav Colors
+        private static readonly Color TopNavBackColor = Color.White;
+        private static readonly Color TopNavHoverColor = Color.FromArgb(245, 246, 250);
+        private static readonly Color NavTextColor = Color.FromArgb(99, 110, 114);
+        private static readonly Color NavActiveTextColor = Color.FromArgb(74, 58, 255); // BOOKA Blue
 
         private static readonly Font BaseFont = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(162)));
         private static readonly Font TitleFont = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(162)));
@@ -44,16 +45,16 @@ namespace LibraryManagementSystem.Utils
                     ctrl.Font = new Font("Segoe UI", ctrl.Font.Size, ctrl.Font.Style, ctrl.Font.Unit);
                 }
 
-                if (ctrl is Panel pnl && pnl.Name == "panelSidebar")
+                if (ctrl is Panel pnl && pnl.Name == "panelTopNav")
                 {
-                    SetupSidebar(pnl, parentForm);
+                    SetupTopNav(pnl, parentForm);
                 }
                 else if (ctrl is Button btn)
                 {
-                    // Don't override sidebar buttons if already processed, but checking parent is safe
-                    if (btn.Parent != null && btn.Parent.Name == "panelSidebar")
+                    // Don't override topnav buttons if already processed
+                    if (btn.Parent != null && btn.Parent.Name == "panelTopNav")
                     {
-                        // handled in SetupSidebar
+                        // handled in SetupTopNav
                     }
                     else
                     {
@@ -85,35 +86,35 @@ namespace LibraryManagementSystem.Utils
             }
         }
 
-        private static void SetupSidebar(Panel sidebar, Form parentForm)
+        private static void SetupTopNav(Panel navbar, Form parentForm)
         {
-            foreach (Control ctrl in sidebar.Controls)
+            foreach (Control ctrl in navbar.Controls)
             {
                 if (ctrl is Button btn)
                 {
-                    btn.BackColor = SidebarBackColor;
-                    btn.ForeColor = Color.White;
+                    if (btn.Name.Contains("Logout")) continue; // Custom styled in Designer
+
+                    btn.BackColor = TopNavBackColor;
+                    btn.ForeColor = NavTextColor;
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
                     btn.Cursor = Cursors.Hand;
 
-                    // Exclude specific buttons from getting active state (like logout) if necessary
-                    // But we can just handle all visually
                     btn.MouseEnter += (s, e) => 
                     {
                         if (!IsActiveButton(parentForm, btn)) 
-                            btn.BackColor = SidebarHoverColor; 
+                            btn.ForeColor = NavActiveTextColor; 
                     };
                     
                     btn.MouseLeave += (s, e) => 
                     {
                         if (!IsActiveButton(parentForm, btn)) 
-                            btn.BackColor = SidebarBackColor; 
+                            btn.ForeColor = NavTextColor; 
                     };
                     
                     btn.Click += (s, e) => 
                     {
-                        SetActiveButton(parentForm, btn, sidebar);
+                        SetActiveButton(parentForm, btn, navbar);
                     };
                 }
             }
@@ -128,27 +129,21 @@ namespace LibraryManagementSystem.Utils
             return false;
         }
 
-        private static void SetActiveButton(Form form, Button activeBtn, Panel sidebar)
+        private static void SetActiveButton(Form form, Button activeBtn, Panel navbar)
         {
-            // Reset others
-            foreach (Control ctrl in sidebar.Controls)
+            foreach (Control ctrl in navbar.Controls)
             {
                 if (ctrl is Button btn)
                 {
-                    // Check if it's logout to avoid keeping it active
-                    if (btn.Name.Contains("Logout") || btn.Name.Contains("ChangePassword"))
-                    {
-                        btn.BackColor = SidebarBackColor;
-                        continue;
-                    }
+                    if (btn.Name.Contains("Logout")) continue;
 
                     if (btn == activeBtn)
                     {
-                        btn.BackColor = SidebarActiveColor;
+                        btn.ForeColor = NavActiveTextColor;
                     }
                     else
                     {
-                        btn.BackColor = SidebarBackColor;
+                        btn.ForeColor = NavTextColor;
                     }
                 }
             }
