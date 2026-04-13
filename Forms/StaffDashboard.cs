@@ -14,6 +14,17 @@ namespace LibraryManagementSystem.Forms
             LoadUserInfo();
             LoadBorrowRequests();
             LoadDailySummary();
+            this.Load += (s, e) => btnHome.PerformClick();
+        }
+
+        private void StaffDashboard_Load(object sender, EventArgs e)
+        {
+            var user = AuthService.CurrentUser;
+            if (user != null)
+            {
+                lblWelcome.Text = $"Hoş Geldiniz, {user.FullName}";
+            }
+            btnHome.PerformClick();
         }
 
         private void LoadUserInfo()
@@ -86,6 +97,16 @@ namespace LibraryManagementSystem.Forms
                 LoadBorrowRequests();
                 LoadDailySummary();
             }
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            LoadDynamicUserControl(new HomeForm());
+        }
+
+        private void btnBookManagement_Click(object sender, EventArgs e)
+        {
+            LoadDynamicUserControl(new BookManagementForm()); // Personel de kitap pencerelerini kendi içinde açabilir.
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
