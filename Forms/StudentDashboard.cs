@@ -11,7 +11,7 @@ namespace LibraryManagementSystem.Forms
             InitializeComponent();
             LibraryManagementSystem.Utils.ThemeManager.ApplyTheme(this);
             LoadUserInfo();
-            this.Load += (s, e) => btnSearchBooks.PerformClick();
+            this.Load += (s, e) => btnHome.PerformClick();
         }
 
         private void LoadUserInfo()
@@ -38,6 +38,11 @@ namespace LibraryManagementSystem.Forms
             this.panelContent.Controls.Add(form);
             this.panelContent.Tag = form;
             form.Show();
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            LoadForm(new HomeForm());
         }
 
         private void btnSearchBooks_Click(object sender, EventArgs e)
