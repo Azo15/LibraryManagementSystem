@@ -22,8 +22,7 @@ namespace LibraryManagementSystem.Forms
             // Add tooltips
             ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(btnSearchBooks, "Kütüphanedeki tüm kitapları arayın ve inceleyin.");
-            toolTip.SetToolTip(btnBorrowRequest, "Seçtiğiniz bir kitap için ödünç alma talebi gönderin.");
-            toolTip.SetToolTip(btnTrackBorrows, "Mevcut ödünç taleplerinizin durumunu (Onaylı, Bekleyen vb.) takip edin.");
+            toolTip.SetToolTip(btnMyBorrows, "Mevcut ödünç taleplerinizin durumunu (Onaylı, Bekleyen vb.) takip edin.");
             toolTip.SetToolTip(btnLogout, "Oturumu güvenli bir şekilde kapatır.");
         }
 
@@ -50,16 +49,7 @@ namespace LibraryManagementSystem.Forms
             LoadForm(new BookSearchForm());
         }
 
-        private void btnBorrowRequest_Click(object sender, EventArgs e)
-        {
-            BorrowRequestForm requestForm = new BorrowRequestForm();
-            if (requestForm.ShowDialog() == DialogResult.OK)
-            {
-                Validators.InputValidator.ShowSuccess("Talep başarıyla gönderildi.");
-            }
-        }
-
-        private void btnTrackBorrows_Click(object sender, EventArgs e)
+        private void btnMyBorrows_Click(object sender, EventArgs e)
         {
             LoadForm(new BorrowTrackingForm());
         }
