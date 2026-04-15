@@ -1,6 +1,7 @@
 # 📚 EduLibrary: Kütüphane Yönetim Sistemi (KYS)
 
-![EduLibrary Dashboard](https://via.placeholder.com/1000x500.png?text=EduLibrary+K%C3%BCt%C3%BCphane+Y%C3%B6netim+Sistemi+%E2%80%A2+C%23+WinForms)
+![EduLibrary Dashboard]<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/92567897-9331-4b56-8d6f-a0003572a4b0" />
+
 
 EduLibrary, modern **Single Page Application (SPA)** mantığıyla C# WinForms üzerinde sıfırdan geliştirilmiş, son derece şık, profesyonel ve yenilikçi bir **Kütüphane Yönetim Sistemidir.** 
 
@@ -36,9 +37,9 @@ Geleneksel ve karmaşık masaüstü yazılımlarının aksine, EduLibrary "Web-T
 | Hoşgeldin & Analiz Ekranı (Dashboard) | Kullanıcı Girişi (Login) |
 | :---: | :---: |
 | ![Dashboard]<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/9d9f2f2a-22dd-463e-a79c-0f12eb4717a2" />
- | ![Login](https://via.placeholder.com/500x300.png?text=Split-Screen+Giris+Ekrani) |
 
-> *(Not: Github'a pushlarken `https://via.placeholder.com/...` linklerini `/Screenshots/dashboard.png` gibi gerçek klasör yollarınızla güncelleyebilirsiniz.)*
+ | ![Login]<img width="1919" height="986" alt="image" src="https://github.com/user-attachments/assets/113ed940-3fb1-44c7-a6f0-45d95b96031a" />
+ |
 
 ---
 
