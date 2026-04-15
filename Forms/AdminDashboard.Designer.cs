@@ -69,12 +69,12 @@ namespace LibraryManagementSystem.Forms
             // 
             this.lblLogo.AutoSize = true;
             this.lblLogo.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.lblLogo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(58)))), ((int)(((byte)(255))))); // BOOKA Purple
+            this.lblLogo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(58)))), ((int)(((byte)(255))))); // EduLibrary Purple
             this.lblLogo.Location = new System.Drawing.Point(20, 20);
             this.lblLogo.Name = "lblLogo";
             this.lblLogo.Size = new System.Drawing.Size(120, 30);
             this.lblLogo.TabIndex = 1;
-            this.lblLogo.Text = "📚 BOOKA";
+            this.lblLogo.Text = "📚 EduLibrary";
             this.lblLogo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblLogo.Click += new System.EventHandler(this.btnHome_Click);
 
@@ -166,7 +166,7 @@ namespace LibraryManagementSystem.Forms
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = linkFont;
             this.btnLogout.ForeColor = System.Drawing.Color.White;
-            this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(58)))), ((int)(((byte)(255))))); // Solid blue/purple BOOKA style
+            this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(58)))), ((int)(((byte)(255))))); // Solid blue/purple EduLibrary style
             this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
 
@@ -204,7 +204,7 @@ namespace LibraryManagementSystem.Forms
             // 
             // panelContent
             // 
-            this.panelContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(253))))); // BOOKA Off-white
+            this.panelContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(253))))); // EduLibrary Off-white
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContent.Location = new System.Drawing.Point(0, 70);
             this.panelContent.Name = "panelContent";

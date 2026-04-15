@@ -73,7 +73,7 @@ namespace LibraryManagementSystem.Forms
             this.lblLogo.Name = "lblLogo";
             this.lblLogo.Size = new System.Drawing.Size(120, 30);
             this.lblLogo.TabIndex = 1;
-            this.lblLogo.Text = "📚 BOOKA";
+            this.lblLogo.Text = "📚 EduLibrary";
             this.lblLogo.Cursor = System.Windows.Forms.Cursors.Hand;
             
             // Nav Link Dimensions

@@ -18,7 +18,7 @@ namespace LibraryManagementSystem.Utils
         private static readonly Color TopNavBackColor = Color.White;
         private static readonly Color TopNavHoverColor = Color.FromArgb(245, 246, 250);
         private static readonly Color NavTextColor = Color.FromArgb(99, 110, 114);
-        private static readonly Color NavActiveTextColor = Color.FromArgb(74, 58, 255); // BOOKA Blue
+        private static readonly Color NavActiveTextColor = Color.FromArgb(74, 58, 255); // EduLibrary Blue
 
         private static readonly Font BaseFont = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(162)));
         private static readonly Font TitleFont = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(162)));
