@@ -35,7 +35,8 @@ Geleneksel ve karmaşık masaüstü yazılımlarının aksine, EduLibrary "Web-T
 
 | Hoşgeldin & Analiz Ekranı (Dashboard) | Kullanıcı Girişi (Login) |
 | :---: | :---: |
-| ![Dashboard](https://via.placeholder.com/500x300.png?text=Modern+Dashboard+Tasarimi) | ![Login](https://via.placeholder.com/500x300.png?text=Split-Screen+Giris+Ekrani) |
+| ![Dashboard]<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/9d9f2f2a-22dd-463e-a79c-0f12eb4717a2" />
+ | ![Login](https://via.placeholder.com/500x300.png?text=Split-Screen+Giris+Ekrani) |
 
 > *(Not: Github'a pushlarken `https://via.placeholder.com/...` linklerini `/Screenshots/dashboard.png` gibi gerçek klasör yollarınızla güncelleyebilirsiniz.)*
 
